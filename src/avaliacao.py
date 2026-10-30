@@ -62,10 +62,10 @@ def salvar_matriz_confusao(
 def salvar_curvas(historico: list[dict], caminho: Path) -> None:
     epocas = [linha["epoca"] for linha in historico]
     figura, (eixo_perda, eixo_acuracia) = plt.subplots(1, 2, figsize=(11, 4))
-    for particao in ("treino", "validacao"):
-        eixo_perda.plot(epocas, [linha[f"perda_{particao}"] for linha in historico], label=particao)
+    for particao, rotulo in (("treino", "Treino"), ("validacao", "Validação")):
+        eixo_perda.plot(epocas, [linha[f"perda_{particao}"] for linha in historico], label=rotulo)
         eixo_acuracia.plot(
-            epocas, [linha[f"acuracia_{particao}"] for linha in historico], label=particao
+            epocas, [linha[f"acuracia_{particao}"] for linha in historico], label=rotulo
         )
     eixo_perda.set(title="Perda", xlabel="Época")
     eixo_acuracia.set(title="Acurácia", xlabel="Época")
