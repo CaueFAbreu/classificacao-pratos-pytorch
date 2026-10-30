@@ -4,7 +4,7 @@
 
 Classificação de imagens de 10 pratos comuns em pedidos de delivery a partir do dataset Food-101. O projeto compara uma CNN treinada do zero com duas formas de transfer learning da ResNet18 (base congelada e ajuste fino), sob o mesmo protocolo de avaliação.
 
-> **Status:** código e testes concluídos. Os resultados serão publicados em `reports/` após o treinamento em GPU.
+> **Status:** concluído. Métricas por classe, curvas de treino e matrizes de confusão estão em [`reports/`](reports/).
 
 ## Stack
 
@@ -12,7 +12,41 @@ Python · PyTorch · torchvision · scikit-learn · matplotlib · pytest · Ruff
 
 ## Resultados
 
-_Em breve._
+Os três modelos foram avaliados uma única vez no conjunto de teste oficial (2.500 imagens, 250 por classe), com o checkpoint de maior acurácia de validação. O treinamento foi executado em uma GPU NVIDIA T4 no Google Colab, com semente 42.
+
+| Experimento | Parâmetros treináveis | Melhor época | Tempo de treino | Acurácia | F1 macro |
+|---|---:|---:|---:|---:|---:|
+| `cnn_simples` | 391.466 | 20 de 20 | 14,6 min | 68,6% | 0,681 |
+| `resnet18_congelada` | 5.130 | 7 de 8 | 5,6 min | 86,3% | 0,863 |
+| `resnet18_ajuste_fino` | 11.181.642 | 8 de 8 | 5,9 min | **94,2%** | **0,942** |
+
+![Acurácia no teste por modelo](reports/comparacao.png)
+
+### Análise
+
+- **Transfer learning:** o ajuste fino da ResNet18 obteve a maior acurácia, 25,6 p.p. acima da CNN treinada do zero e 7,9 p.p. acima da base congelada, com tempo de treino semelhante ao da base congelada.
+- **CNN treinada do zero:** a acurácia de validação cresceu até a última época, o que indica que o desempenho foi limitado pelo número de épocas, e não por overfitting.
+- **Base congelada:** a acurácia de validação se estabilizou entre 81% e 82% a partir da 4ª época, já que apenas a camada de classificação é ajustada sobre as representações fixas aprendidas no ImageNet.
+- **Ajuste fino:** a acurácia de treino chegou a 98,8%, contra 90,6% na validação, e a perda de validação se manteve em torno de 0,31 a partir da 5ª época. Há sinal de overfitting, mas sem queda da acurácia de validação no período treinado ([curvas de treino](reports/resnet18_ajuste_fino/curvas.png)).
+- **Teste acima da validação:** nos três modelos, a acurácia de teste superou a de validação em 3,6 a 4,4 p.p. A diferença é consistente com o ruído de rótulo do treino do Food-101, de onde a validação é extraída, enquanto o teste foi revisado manualmente.
+
+### Confusões mais frequentes
+
+Pares de classes mais confundidos no teste, somando os dois sentidos:
+
+| Par de classes | CNN do zero | Base congelada | Ajuste fino |
+|---|---:|---:|---:|
+| Pizza e lasanha | 86 | 41 | 23 |
+| Hambúrguer e cachorro-quente | 48 | 25 | 19 |
+| Donut e sorvete | 57 | 15 | 5 |
+
+Pizza e lasanha formam o par mais confundido em todos os modelos, possivelmente pela semelhança visual entre os pratos vistos de cima. A confusão entre donut e sorvete, frequente na CNN treinada do zero, cai de 57 para 5 casos com o ajuste fino ([matriz de confusão](reports/resnet18_ajuste_fino/matriz_confusao.png)).
+
+### Limitações
+
+- Cada experimento foi executado com uma única semente, portanto não há estimativa da variância entre execuções.
+- Com 2.500 imagens de teste, o intervalo de confiança de 95% da acurácia varia de ±0,9 p.p. (ajuste fino) a ±1,8 p.p. (CNN do zero).
+- O estudo usa 10 das 101 classes do Food-101, e os resultados não se estendem diretamente ao dataset completo.
 
 ## Dados
 
