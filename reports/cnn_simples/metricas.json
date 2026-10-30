@@ -1,0 +1,242 @@
+{
+  "modelo": "cnn_simples",
+  "descricao": "CNN de 4 blocos treinada do zero",
+  "dispositivo": "cuda",
+  "epocas": 20,
+  "taxa_aprendizado": 0.001,
+  "tamanho_lote": 64,
+  "semente": 42,
+  "parametros_totais": 391466,
+  "parametros_treinaveis": 391466,
+  "melhor_epoca": 20,
+  "melhor_acuracia_validacao": 0.6444444444444445,
+  "tempo_treino_segundos": 874.2,
+  "teste": {
+    "acuracia": 0.6864,
+    "f1_macro": 0.6810293534193198,
+    "por_classe": {
+      "Asinha de frango": {
+        "precision": 0.7248322147651006,
+        "recall": 0.864,
+        "f1-score": 0.7883211678832117,
+        "support": 250.0
+      },
+      "Donut": {
+        "precision": 0.6345381526104418,
+        "recall": 0.632,
+        "f1-score": 0.6332665330661322,
+        "support": 250.0
+      },
+      "Batata frita": {
+        "precision": 0.7459677419354839,
+        "recall": 0.74,
+        "f1-score": 0.7429718875502008,
+        "support": 250.0
+      },
+      "Arroz frito": {
+        "precision": 0.7947761194029851,
+        "recall": 0.852,
+        "f1-score": 0.8223938223938224,
+        "support": 250.0
+      },
+      "Hambúrguer": {
+        "precision": 0.6192660550458715,
+        "recall": 0.54,
+        "f1-score": 0.5769230769230769,
+        "support": 250.0
+      },
+      "Cachorro-quente": {
+        "precision": 0.5706806282722513,
+        "recall": 0.436,
+        "f1-score": 0.4943310657596372,
+        "support": 250.0
+      },
+      "Sorvete": {
+        "precision": 0.6612903225806451,
+        "recall": 0.656,
+        "f1-score": 0.6586345381526104,
+        "support": 250.0
+      },
+      "Lasanha": {
+        "precision": 0.6359649122807017,
+        "recall": 0.58,
+        "f1-score": 0.606694560669456,
+        "support": 250.0
+      },
+      "Pizza": {
+        "precision": 0.697841726618705,
+        "recall": 0.776,
+        "f1-score": 0.7348484848484849,
+        "support": 250.0
+      },
+      "Sushi": {
+        "precision": 0.718978102189781,
+        "recall": 0.788,
+        "f1-score": 0.7519083969465649,
+        "support": 250.0
+      },
+      "accuracy": 0.6864,
+      "macro avg": {
+        "precision": 0.6804135975701968,
+        "recall": 0.6864,
+        "f1-score": 0.6810293534193198,
+        "support": 2500.0
+      },
+      "weighted avg": {
+        "precision": 0.6804135975701966,
+        "recall": 0.6864,
+        "f1-score": 0.6810293534193198,
+        "support": 2500.0
+      }
+    },
+    "matriz_confusao": [
+      [
+        216,
+        1,
+        2,
+        5,
+        3,
+        0,
+        3,
+        11,
+        2,
+        7
+      ],
+      [
+        15,
+        158,
+        4,
+        3,
+        9,
+        11,
+        31,
+        2,
+        8,
+        9
+      ],
+      [
+        10,
+        3,
+        185,
+        4,
+        13,
+        23,
+        4,
+        5,
+        0,
+        3
+      ],
+      [
+        4,
+        1,
+        7,
+        213,
+        6,
+        0,
+        6,
+        5,
+        3,
+        5
+      ],
+      [
+        13,
+        20,
+        19,
+        1,
+        135,
+        23,
+        4,
+        9,
+        8,
+        18
+      ],
+      [
+        8,
+        25,
+        26,
+        8,
+        25,
+        109,
+        20,
+        11,
+        3,
+        15
+      ],
+      [
+        11,
+        26,
+        3,
+        9,
+        5,
+        15,
+        164,
+        1,
+        2,
+        14
+      ],
+      [
+        16,
+        5,
+        1,
+        10,
+        8,
+        3,
+        6,
+        145,
+        51,
+        5
+      ],
+      [
+        1,
+        1,
+        0,
+        7,
+        7,
+        3,
+        1,
+        35,
+        194,
+        1
+      ],
+      [
+        4,
+        9,
+        1,
+        8,
+        7,
+        4,
+        9,
+        4,
+        7,
+        197
+      ]
+    ],
+    "confusoes_mais_frequentes": [
+      {
+        "real": "Lasanha",
+        "previsto": "Pizza",
+        "quantidade": 51
+      },
+      {
+        "real": "Pizza",
+        "previsto": "Lasanha",
+        "quantidade": 35
+      },
+      {
+        "real": "Donut",
+        "previsto": "Sorvete",
+        "quantidade": 31
+      },
+      {
+        "real": "Sorvete",
+        "previsto": "Donut",
+        "quantidade": 26
+      },
+      {
+        "real": "Cachorro-quente",
+        "previsto": "Batata frita",
+        "quantidade": 26
+      }
+    ]
+  }
+}
