@@ -29,3 +29,6 @@ __pycache__/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Documentos locais
+CLAUDE.md
